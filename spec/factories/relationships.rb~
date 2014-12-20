@@ -1,0 +1,24 @@
+FactoryGirl.define do
+  factory :relationship do
+    user_id 1
+    followings_id 2
+    create "MyString"
+    destroy "MyString"
+  end
+end
+
+describe Relationship do
+  before(:each) do
+    @user1 = FactoryGirl.create(:user)
+    @user2 = FactoryGirl.create(:user)
+    @user3 = FactoryGirl.create(:user)
+  end
+
+  it "should return false if not following" do
+     relation = Relationship.create(:user_id => @user1.id, :followings_id => @user2.id)
+     expect(@user1.following?).to be true
+  end
+  
+  it "should return true if i'm following" do
+  end
+end

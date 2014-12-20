@@ -118,6 +118,13 @@ textarea {
   font: inherit;
   color: inherit;
 }
+textarea#post_area {
+  width: 340px;
+}
+table#info_area{
+  width: 340px;
+}
+
 button {
   overflow: visible;
 }
@@ -282,6 +289,11 @@ th {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
 .glyphicon-asterisk:before {
   content: "\2a";
 }

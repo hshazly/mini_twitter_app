@@ -1,0 +1,45 @@
+require 'rails_helper'
+require 'spec_helper'
+
+RSpec.describe PostsController, :type => :controller do
+  before(:each) do
+     @user = FactoryGirl.create(:user)
+     sign_in @user
+  end
+
+ it "save the post if it is valid" do
+    post = FactoryGirl.create(:post, :user_id => @user.id)
+    expect(post).to be_valid
+    expect(response).to be_success
+ end
+ 
+ 
+ it "has one more post when data is valid" do
+    post = FactoryGirl.create(:post, :user_id => @user.id)
+    expect(post).to be_valid
+    expect(@user.posts.count).to be > 0
+ end  
+
+
+ it "don't save the data if it is not valid" do
+    post = FactoryGirl.build(:post, :context => "", :user_id => @user.id)
+    expect(post).to_not be_valid    
+    expect(@user.posts.count).to eql(0)
+ end
+ 
+ it "only the author of the post can delete it" do
+    other_user = FactoryGirl.create(:user, :email => "bb@bb.com")
+    post = FactoryGirl.create(:post, :user_id => other_user.id)
+    delete :destroy, :user_id => @user.id, :id => post.id
+    expect(response).to_not be_success
+ end
+
+ it "authorized user can delete the post" do
+    post = FactoryGirl.create(:post, :user_id => @user.id)
+    delete :destroy, :user_id => @user.id, :id => post.id
+    expect(response).to redirect_to @user
+ end
+ 
+
+
+end

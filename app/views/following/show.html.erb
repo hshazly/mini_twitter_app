@@ -1,0 +1,30 @@
+<div class="row">
+   <div class="span8 pull-right">
+      <h1>Following:</h1>
+           <ul>
+           <% @followings.each do |following| %>
+           <li> <%= link_to "#{following.email}", user_path(following.id) %> </li>
+           <% end %>
+           </ul>
+   </div>
+  <div class="span3">
+     <table class="table table-bordered" style="width: 340px">
+       <tr>
+          <td> <strong> <%= current_user.email %> </strong> </td>
+       </tr>
+       <tr>
+          <td>POSTS</td>
+          <td><%= link_to "FOLLOWING", following_user_path(current_user.id) %></td>
+          <td><%= link_to "FOLLOWERS", followers_user_path(current_user.id) %></td>
+       </tr>
+       <tr>
+         <td><%= current_user.posts.count %></td>
+         <td><%= current_user.followings.count %></td>
+         <td><%= current_user.followers.count %></td>
+       </tr>
+     </table>
+  </div>
+   
+   
+</div>
+

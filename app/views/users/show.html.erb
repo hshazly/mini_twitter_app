@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+
+<div class="row-fluid" >
+
+  <div class="span7 pull-right"> 
+     <table class="table table-bordered">
+        <tr><td>  <%= render get_posts(@user) %> </td></tr>
+     </table>
+  </div>
+
+  <div class="span3">
+     <table class="table table-bordered" style="width: 340px">
+       <tr>
+          <td> <strong> <%= @user.email %> </strong> </td>
+          <% if not current_user.id.eql? @user.id %>
+          <% if following? @user.id %>
+          <td colspan="2"> <%= link_to "Unfollow", relationship_path(:user_id => @user.id), :method => :delete, :class => "btn btn-danger btn-block" %> </td>
+          <% else %>
+          <td colspan="2"> <%= link_to "Follow", relationships_path(:user_id => @user.id), :method => :post, :class => "btn btn-primary btn-block" %> </td>
+          <% end %>
+          <% end %>
+       </tr>
+       <tr>
+          <td>POSTS</td>
+          <td><%= link_to "FOLLOWING", following_user_path %></td>
+          <td><%= link_to "FOLLOWERS", followers_user_path %></td>
+       </tr>
+       <tr>
+         <td><%= @posts_number %></td>
+         <td><%= @followings_number %></td>
+         <td><%= @followers_number %></td>
+       </tr>
+     </table>
+     <%= render "posts/form" %>
+  </div>
+
+<!--
+   <div class="span1">
+   </div>
+
+-->
+   
+</div>
+
+
+
+
+
+

@@ -1,0 +1,4 @@
+<%= form_for([@user, @user.posts.build]) do |f| %>
+    <%= f.text_area :context, :rows => 4, placeholder: "What's Up?", :id => "post_area" %>
+    <%= f.submit "Post" %>
+<% end %>
